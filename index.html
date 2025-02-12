@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        body{
+        background: #191919;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 60px;
+
+        }
+
+        .inputPosition{
+            padding: 30px;
+        }
+        .inputStyle{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+        h1{
+            font-size: 45px;
+            color: white;
+            font-family: "Bookman Old Style",sans-serif;
+        }
+        .inputDateStyle{
+            display: flex;
+            align-items: center;
+            color: white;
+            gap: 60px;
+        }
+        .arrowStyle{
+            width: 100px;
+            height: 100px;
+        }
+        label{
+            font-family: "Bookman Old Style",sans-serif;
+            font-size: 25px;
+            color: white;
+        }
+        @keyframes moveCircles {
+            0% {
+                top: 0%;
+                left: 0%;
+                transform: translate(-50%, -50%);
+            }
+            25% {
+                top: 0%;
+                left: 100%;
+                transform: translate(-50%, -50%);
+            }
+            50% {
+                top: 100%;
+                left: 100%;
+                transform: translate(-50%, -50%);
+            }
+            75% {
+                top: 100%;
+                left: 0%;
+                transform: translate(-50%, -50%);
+            }
+            100% {
+                top: 0%;
+                left: 0%;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .box {
+            font-size: 80px;
+            color: white;
+            padding: 25px 20px;
+            background: linear-gradient(to top, #252525, #494949);
+            box-shadow: 0 8px 16px rgba(142, 142, 142, 0.5);
+            border-radius: 30px;
+            font-family: 'Digital 7', monospace;
+            border: 1px solid white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box::before,
+        .box::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            animation: moveCircles 10s linear infinite;
+        }
+
+        .box::before {
+            width: 40px;
+            height: 40px;
+            animation-duration: 6s; /* Повільніше */
+        }
+
+        .box::after {
+            width: 60px;
+            height: 60px;
+            animation-duration: 8s; /* Швидше */
+        }
+
+
+        #countdown {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .label {
+            font-size: 25px;
+            color: #d3d3d3;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .position{
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        .buttonStyle{
+            font-size: 20px;
+            border-radius: 30px;
+            padding: 10px;
+            font-family: "Bookman Old Style",sans-serif;
+            font-weight: bold;
+            color: #ffffff;
+            background: black;
+            box-shadow: 0 8px 16px rgba(142, 142, 142, 0.5);
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+        .buttonStyle:hover{
+            background: #ffffff;
+            color: black;
+        }
+        #targetDate{
+            display: flex;
+            background: #3a3939;
+            font-size: 20px;
+            border: 5px solid black;
+            padding: 10px;
+            color: white;
+        }
+        .timerAndTitle{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .timer{
+            width: 60px;
+            height: 60px;
+        }
+        .massage {
+            margin-top: 10px;
+            color: red;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .dots{
+            display: flex;
+            top: -32px;
+            color: white;
+            font-size: 100px;
+            position: relative;
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="inputPosition">
+        <div class="inputStyle">
+            <div class="timerAndTitle">
+
+            <h1>COUNTDOWN TO YOUR DATE</h1>
+                <img class="timer" src="./img/timer.png">
+            </div>
+            <div class="inputDateStyle">
+            <label for="targetDate">Enter the date:</label>
+                <img class="arrowStyle" src="./img/arrow.png">
+                <input type="datetime-local" id="targetDate">
+
+                <div class="massage">
+                    <span id="resultCalculate"></span>
+                </div>
+            </div>
+            <button class="buttonStyle" onclick="startCount()">start countdown</button>
+        </div>
+
+    </div>
+
+    <div id="countdown">
+
+        <div class="position">
+            <div class="box">
+                <span id="years">00</span>
+            </div>
+
+            <span class="label">years</span>
+        </div>
+        <span class="dots">:</span>
+        <div class="position">
+            <div class="box">
+                <span id="months">00</span>
+            </div>
+            <span class="label">months</span>
+        </div>
+        <span class="dots">:</span>
+        <div class="position">
+            <div class="box">
+                <span id="days">00</span>
+            </div>
+            <span class="label">days</span>
+        </div>
+        <span class="dots">:</span>
+        <div class="position">
+            <div class="box">
+                <span id="hours">00</span>
+            </div>
+            <span class="label">hours</span>
+        </div>
+        <span class="dots">:</span>
+        <div class="position">
+            <div class="box">
+                <span id="minutes">00</span>
+            </div>
+            <span class="label">minutes</span>
+        </div>
+        <span class="dots">:</span>
+        <div class="position">
+            <div class="box">
+                <span id="seconds">00</span>
+            </div>
+            <span class="label">seconds</span>
+        </div>
+
+    </div>
+
+</div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
